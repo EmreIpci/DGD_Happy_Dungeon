@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Happy_Dungeon"
-run/main_scene="res://Happy_Dungeon.tscn"
+run/main_scene="res://Tileset/Happy_Dungeon.tscn"
 config/icon="res://icon.png"
 
 [autoload]
