@@ -1,61 +1,31 @@
-if global_position.distance_to(whatToFollow.global_position) < follow_distance:
-		# Dealing With Y Axis Is Super Hard!!!!!!!!!!!
-		if (floor(global_position.y) < floor(whatToFollow.global_position.y)):
-			
-			if (global_position.y < whatToFollow.global_position.y):
-				
-				motion = Vector2.DOWN * speed
-				movement = "Walk_down"
-				animPlayer.play(movement, -speedMultiplier)
-			
-			elif(global_position.y > whatToFollow.global_position.y):
-				motion = Vector2.UP * speed
-				movement = "Walk_up"
-				animPlayer.play(movement, -speedMultiplier)
-		
-		elif (floor(global_position.y) > floor(whatToFollow.global_position.y)):
-			
-			if (global_position.y < whatToFollow.global_position.y):
-				
-				motion = Vector2.DOWN * speed
-				movement = "Walk_down"
-				animPlayer.play(movement, -speedMultiplier)
-			
-			elif(global_position.y > whatToFollow.global_position.y):
-				motion = Vector2.UP * speed
-				movement = "Walk_up"
-				animPlayer.play(movement, -speedMultiplier)
-			
-		
+extends KinematicBody2D
+
+onready var player = null
+var speed = 100
+var motion = Vector2()
+var distacneToAttack = 200
+
+func _ready():
+	player = get_parent().get_parent().get_node("Player")
 	
-		elif (global_position.x < whatToFollow.global_position.x):
-			motion = Vector2.RIGHT * speed
-			# Play Left Animation
-			movement = "Walk_right"
-			animPlayer.play(movement, -speedMultiplier)
-			
-		elif (global_position.x > whatToFollow.global_position.x):
-			motion = Vector2.LEFT * speed
-			movement = "Walk_left"
-			animPlayer.play(movement, -speedMultiplier)
-		
-		
-		
+func stay():
+	player = null
 	
-	else:
-		motion = Vector2.ZERO
-		if !moving:
-			animPlayer.stop()
-			match movement:
-				"Walk_left":
-					animPlayer.stop()
-					animPlayer.play("Idle_left")
-				"Walk_right":
-					animPlayer.stop()
-					animPlayer.play("Idle_right")
-				"Walk_up":
-					animPlayer.stop()
-					animPlayer.play("Idle_up")
-				"Walk_down":
-					animPlayer.stop()
-					animPlayer.play("Idle_down")
+	
+func follow(deltaTime):
+	#distance = start - end um den Abstand zu ermitteln
+	var MoveVector = (player.position - position)
+	var Velocity = speed * deltaTime
+	motion = MoveVector * Velocity
+	
+	
+	if position.distance_to(player.position) <= distacneToAttack:
+		look_at(player.global_position)
+		move_and_slide(motion)
+		
+		
+func Talk():
+	pass
+	
+func _process(delta):
+	follow(delta)

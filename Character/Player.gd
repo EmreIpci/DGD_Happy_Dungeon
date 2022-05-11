@@ -2,29 +2,30 @@ extends KinematicBody2D
 
 export var speed = 1000
 var motion = Vector2()
-
 var moving = false
 onready var animPlayer = get_node("AnimationPlayer")
 var movement
 var speedMultiplier = 8
 
 
-var collided_with_npc = true
-
 func _ready():
 	set_physics_process(true)
 	
-	
+	#var button = Button.new()
+	#button.text = "Click me"
+	#button.connect("pressed", self, "_button_pressed")
+	#add_child(button)
+
 #func _process(delta):
 	
-#	self.global_position= get_global_mouse_position()
-
-	##if $AudioStreamPlayer2D.playing == false:
+	#if $AudioStreamPlayer2D.playing == false:
 	#	$AudioStreamPlayer2D.play()
 	#pass
-
-func _physics_process(delta):
 	
+#func _button_pressed():
+	#print("Hello world!")
+	
+func _physics_process(delta):
 	ApplyMovement(delta)
 	
 	
@@ -60,14 +61,13 @@ func ApplyMovement(deltaTime):
 	#Dialog während des Spiels
 	elif dialoque:
 		var dialoque_node = get_parent().get_node("Dialoque/CanvasLayer/dialoque")
-		dialoque_node.show_text("INTRO","INTRO")
-		
+		dialoque_node.show_text("Helloworld","Lady")
+	#Check ob bewegt wird	
 	elif !LEFT or !RIGHT or  !UP or !DOWN:
 		moving = false
 		CheckMovementLoop()
 
 	# Motion Calculation 
-			
 	move_and_slide(motion.normalized() * speed * speedMultiplier * deltaTime)
 	
 	
@@ -77,27 +77,27 @@ func CheckMovementLoop():
 		if !motion.is_normalized():
 			match motion.normalized():
 				Vector2.LEFT:
-					movement = "Walk_left"
+					movement = "walk_left"
 					animPlayer.play(movement, -speedMultiplier)
 				Vector2.RIGHT:
-					movement = "Walk_right"
+					movement = "walk_right"
 					animPlayer.play(movement, -speedMultiplier)
 				Vector2.UP:
-					movement = "Walk_up"
+					movement = "walk_up"
 					animPlayer.play(movement, -speedMultiplier)
 				Vector2.DOWN:
-					movement = "Walk_down"
+					movement = "walk_down"
 					animPlayer.play(movement, -speedMultiplier)
 			
 	elif !moving:
 		motion.x = 0
 		motion.y = 0
 		match movement:
-			"Walk_left":
-				animPlayer.play("Idle_left")
-			"Walk_right":
-				animPlayer.play("Idle_right")
-			"Walk_up":
-				animPlayer.play("Idle_up")
-			"Walk_down":
-				animPlayer.play("Idle_down")
+			"walk_left":
+				animPlayer.play("idle_left")
+			"walk_right":
+				animPlayer.play("idle_right")
+			"walk_up":
+				animPlayer.play("idle_up")
+			"walk_down":
+				animPlayer.play("idle_down")
