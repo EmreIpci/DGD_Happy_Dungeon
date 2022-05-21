@@ -16,7 +16,6 @@ func _ready():
 	#button.connect("pressed", self, "_button_pressed")
 	#add_child(button)
 
-#func _process(delta):
 	
 	#if $AudioStreamPlayer2D.playing == false:
 	#	$AudioStreamPlayer2D.play()
