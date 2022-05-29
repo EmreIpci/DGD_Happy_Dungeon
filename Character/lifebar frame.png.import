@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Death.png-83586dbeaadb705ed9d0303d5712b8ec.stex"
+path="res://.import/lifebar frame.png-33eecf4939b81b7dee53ca06ae929a27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Flying eye/Death.png"
-dest_files=[ "res://.import/Death.png-83586dbeaadb705ed9d0303d5712b8ec.stex" ]
+source_file="res://Character/lifebar frame.png"
+dest_files=[ "res://.import/lifebar frame.png-33eecf4939b81b7dee53ca06ae929a27.stex" ]
 
 [params]
 

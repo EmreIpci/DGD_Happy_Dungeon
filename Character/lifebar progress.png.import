@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Death.png-83586dbeaadb705ed9d0303d5712b8ec.stex"
+path="res://.import/lifebar progress.png-cd0d659f1fbe8ea999da64839bffde60.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Flying eye/Death.png"
-dest_files=[ "res://.import/Death.png-83586dbeaadb705ed9d0303d5712b8ec.stex" ]
+source_file="res://Character/lifebar progress.png"
+dest_files=[ "res://.import/lifebar progress.png-cd0d659f1fbe8ea999da64839bffde60.stex" ]
 
 [params]
 
