@@ -3,23 +3,21 @@ extends KinematicBody2D
 export (int) var speed = 20
 var motion = Vector2()
 var direction = ""
-var dir_rand =  null 
+var dir_rand =  null
+var track_player : bool = false
 export (int) var timer = 6
 var no_movement : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	$AnimationPlayer.play("Attack")
-	$EnemySprite.play("flight")
+	$EnemySprite.play("move")
 	var dir_rand = rand_range(0, 3)
 	setDirection(int(dir_rand))
 	
 	
 func _physics_process(delta):
-	
 	movement_loop()
-	
-	pass
 	
 func setDirection(random_value):
 	match random_value:
@@ -82,4 +80,4 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	if body.name == "Player":
 		no_movement = false
-		$EnemySprite.play("flight")
+		$EnemySprite.play("move")

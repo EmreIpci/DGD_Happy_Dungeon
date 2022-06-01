@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset/preview.png" type="Texture" id=2]
@@ -7,11 +7,9 @@
 [ext_resource path="res://Tileset/tileset_dungeon.png" type="Texture" id=6]
 [ext_resource path="res://Tileset/IceTileset.png" type="Texture" id=7]
 [ext_resource path="res://Tileset/sloppymess.png" type="Texture" id=8]
-[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/SMRT/dialog.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Tileset/Happy_Dungeon.gd" type="Script" id=12]
 [ext_resource path="res://Patreon Goal Reward Loops - Track 01.wav" type="AudioStream" id=13]
-[ext_resource path="res://Script/EnemyPlacer.gd" type="Script" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "terrain_atlas.png 0"
@@ -4457,10 +4455,3 @@ position = Vector2( 1578, 545 )
 shape = SubResource( 32 )
 
 [node name="EnemyPlacer" type="Node2D" parent="."]
-script = ExtResource( 14 )
-
-[node name="Enemy1" type="KinematicBody2D" parent="EnemyPlacer"]
-visible = false
-
-[node name="Enemy" parent="EnemyPlacer" instance=ExtResource( 10 )]
-position = Vector2( -105, 151 )

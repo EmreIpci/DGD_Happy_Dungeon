@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Enemy/Flying eye/Flight.png" type="Texture" id=1]
 [ext_resource path="res://Script/Enemy.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/EnemySprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/EnemyFlyingEye.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=31]
 radius = 15.0333
@@ -34,10 +34,9 @@ tracks/0/keys = {
 resource_name = "Take Hit"
 
 [sub_resource type="CircleShape2D" id=32]
-radius = 65.0
+radius = 504.397
 
 [node name="Enemy" type="KinematicBody2D"]
-position = Vector2( 307, 223 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
