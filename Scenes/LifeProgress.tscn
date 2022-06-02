@@ -4,10 +4,10 @@
 [ext_resource path="res://Character/lifebar frame.png" type="Texture" id=2]
 [ext_resource path="res://Script/LifeProgress.gd" type="Script" id=3]
 
-[node name="EnemyLifeProgress" type="TextureProgress"]
+[node name="LifeProgress" type="TextureProgress"]
 margin_right = 128.0
 margin_bottom = 33.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.25, 0.2 )
 value = 80.0
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 1 )

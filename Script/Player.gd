@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var id : int = 1
 export var speed = 1000
 var motion = Vector2()
 
@@ -12,38 +13,29 @@ var is_collided = false
 var dialKeyCheck = false
 
 var IDLE = null
-
-var sword_iteself = preload("res://Attacks/SWORD.tscn")
-var sword_item = null
 export (int) var timer = 0.2
-
 onready var Cam = $Camera2D
 
+var swinging : bool = false
 
 func _ready():
+	IDLE = "idle_down"
+	$SWORD.set_deferred("monitoring", false)
 	set_physics_process(true)
 	set_process(true)
-
-	#var button = Button.new()
-	#button.text = "Click me"
-	#button.connect("pressed", self, "_button_pressed")
-	#add_child(button)
-
+	visible = true
 	
-	#if $AudioStreamPlayer2D.playing == false:
-	#	$AudioStreamPlayer2D.play()
-	#pass
-	
-#func _button_pressed():
-	#print("Hello world!")
 	
 func _physics_process(delta):
-	ApplyMovement(delta)
-	
-func _process(delta):
-	Attack()
 	GetCollisions()
 	CheckingSoundingEffect()
+	
+func _process(delta):
+	ApplyMovement(delta)
+	if Input.is_action_just_pressed("ui_accept"):
+		swinging = true
+		$SWORD.set_deferred("monitoring", true)
+		Attack()
 
 func ApplyMovement(deltaTime):
 	var LEFT = Input.is_action_pressed("ui_left")
@@ -56,21 +48,25 @@ func ApplyMovement(deltaTime):
 	if LEFT:
 		motion = Vector2.LEFT * speed
 		moving = true
+		IDLE = "idle_left"
 		CheckMovementLoop()
 		
 	elif RIGHT:
 		motion = Vector2.RIGHT * speed
 		moving = true
+		IDLE = "idle_right"
 		CheckMovementLoop()
 		
 	elif UP:
 		motion = Vector2.UP * speed
 		moving = true
+		IDLE = "idle_up"
 		CheckMovementLoop()
 		
 	elif DOWN:
 		motion = Vector2.DOWN * speed
 		moving = true
+		IDLE = "idle_down"
 		CheckMovementLoop()
 		
 		
@@ -89,49 +85,12 @@ func ApplyMovement(deltaTime):
 
 #Going soundeffects
 func CheckingSoundingEffect():
-	
 	var sound = $AudioStreamPlayer2D
-	
-#	var LEFT = Input.is_action_just_pressed("ui_left")
-#	var RIGHT = Input.is_action_just_pressed("ui_right")
-#	var UP = Input.is_action_just_pressed("ui_up")
-#	var DOWN = Input.is_action_just_pressed("ui_down")
-#
-#	var Direction = [LEFT,RIGHT,UP,DOWN]
-#
-#	var LEFT_RELEASE = Input.is_action_just_released("ui_left")
-#	var RIGHT_RELEASE = Input.is_action_just_released("ui_right")
-#	var UP_RELEASE = Input.is_action_just_released("ui_up")
-#	var DOWN_RELEASE = Input.is_action_just_released("ui_down")
-#
-#	var Direction_Release = [LEFT_RELEASE,RIGHT_RELEASE,UP_RELEASE,DOWN_RELEASE]
-		
-	
 	if moving:
 		if !sound.is_playing():
 			sound.play()
 	else:
 		sound.stop()
-	
-#	if LEFT:
-#		sound.play()
-#	if RIGHT:
-#		sound.play()
-#	if DOWN:
-#		sound.play()
-#	if UP:
-#		sound.play()
-#
-#	if LEFT_RELEASE:
-#		sound.stop()
-#	if RIGHT_RELEASE:
-#		sound.stop()
-#	if DOWN_RELEASE:
-#		sound.stop()
-#	if UP_RELEASE:
-#		sound.stop()
-	
-	pass	
 	
 func CheckMovementLoop():
 	if moving:
@@ -139,45 +98,40 @@ func CheckMovementLoop():
 			match motion.normalized():
 				Vector2.LEFT:
 					movement = "walk_left"
-					$AnimatedSprite.play(movement)
-					#animPlayer.play(movement, -speedMultiplier)
 				Vector2.RIGHT:
 					movement = "walk_right"
-					$AnimatedSprite.play(movement)
-					#animPlayer.play(movement, -speedMultiplier)
 				Vector2.UP:
 					movement = "walk_up"
-					$AnimatedSprite.play(movement)
-					#animPlayer.play(movement, -speedMultiplier)
 				Vector2.DOWN:
 					movement = "walk_down"
-					$AnimatedSprite.play(movement)
-					#animPlayer.play(movement, -speedMultiplier)
+			$AnimatedSprite.play(movement)
+			if !$SwordAnim.is_playing():
+				$SwordAnim.play(movement)
 			
-	elif !moving:
+	else:
 		motion.x = 0
 		motion.y = 0
 		match movement:
 			"walk_left":
 				IDLE = "idle_left"
 				$AnimatedSprite.play(IDLE)
-#				animPlayer.stop()
-#				animPlayer.play(IDLE)
+				if !$SwordAnim.is_playing():
+					$SwordAnim.play("idle_left")
 			"walk_right":
 				IDLE = "idle_right"
 				$AnimatedSprite.play(IDLE)
-#				animPlayer.stop()
-#				animPlayer.play(IDLE)
+				if !$SwordAnim.is_playing():
+					$SwordAnim.play("idle_right")
 			"walk_up":
 				IDLE = "idle_up"
 				$AnimatedSprite.play(IDLE)
-#				animPlayer.stop()
-#				animPlayer.play(IDLE)
+				if !$SwordAnim.is_playing():
+					$SwordAnim.play("idle_up")
 			"walk_down":
 				IDLE = "idle_down"
 				$AnimatedSprite.play(IDLE)
-#				animPlayer.stop()
-#				animPlayer.play(IDLE)
+				if !$SwordAnim.is_playing():
+					$SwordAnim.play("idle_down")
 				
 func GetCollisions():
 	for i in range(get_slide_count()):
@@ -192,76 +146,24 @@ func DialCheck():
 	return dialKeyCheck
 	
 func Attack():
-	if Input.is_action_just_pressed("ui_accept"):
-		match IDLE:
-			"idle_right":
-				#Instance a sword with left axis
-				var sword_item = sword_iteself.instance()
-				sword_item.position=get_node("Sprite").global_position
-				
-				#play Animation
-				sword_item.get_node("AnimationPlayer").play("RIGHT")
-				
-				var g = get_parent().get_children()
-				if g.has(sword_item):
-					return
-				get_parent().add_child(sword_item)
-				
-				#Start a timer
-				yield(get_tree().create_timer(timer),"timeout")
-				#if the timer ends destroy sword
-				sword_item.queue_free()
-				
-			"idle_left":
-				#Instance a sword with left axis
-				var sword_item = sword_iteself.instance()
-				sword_item.position=get_node("Sprite").global_position
-				
-				#play Animation
-				sword_item.get_node("AnimationPlayer").play("LEFT")
-				
-				var g = get_parent().get_children()
-				if g.has(sword_item):
-					return
-				get_parent().add_child(sword_item)
-				
-				#Start a timer
-				yield(get_tree().create_timer(timer),"timeout")
-				#if the timer ends destroy sword
-				sword_item.queue_free()
-				
-			"idle_up":
-				#Instance a sword with left axis
-				var sword_item = sword_iteself.instance()
-				sword_item.position=get_node("Sprite").global_position
-				
-				#play Animation
-				sword_item.get_node("AnimationPlayer").play("UP")
-				
-				var g = get_parent().get_children()
-				if g.has(sword_item):
-					return
-				get_parent().add_child(sword_item)
-				
-				#Start a timer
-				yield(get_tree().create_timer(timer),"timeout")
-				#if the timer ends destroy sword
-				sword_item.queue_free()
-				
-			"idle_down":
-				#Instance a sword with left axis
-				var sword_item = sword_iteself.instance()
-				sword_item.position=get_node("Sprite").global_position
-				
-				#play Animation
-				sword_item.get_node("AnimationPlayer").play("DOWN")
-				
-				var g = get_parent().get_children()
-				if g.has(sword_item):
-					return
-				get_parent().add_child(sword_item)
-				
-				#Start a timer
-				yield(get_tree().create_timer(timer),"timeout")
-				#if the timer ends destroy sword
-				sword_item.queue_free()
+	match IDLE:
+		"idle_right":
+			$SwordAnim.play("swing_right")
+		"idle_left":
+			$SwordAnim.play("swing_left")
+		"idle_up":
+			$SwordAnim.play("swing_up")
+		"idle_down":
+			$SwordAnim.play("swing_down")
+
+
+func _on_SwordAnim_animation_finished(anim_name):
+	if anim_name == "swing_right" or anim_name == "swing_left" or anim_name == "swing_up" or anim_name == "swing_down":
+		swinging = false
+		set_deferred("monitoring", false)
+
+
+func _on_SWORD_body_entered(body):
+	print(body.name)
+	if body.id == 2 :
+		body._take_hit()

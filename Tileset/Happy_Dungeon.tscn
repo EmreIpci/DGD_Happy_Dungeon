@@ -1,12 +1,14 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset/preview.png" type="Texture" id=2]
 [ext_resource path="res://Tileset/terrain_atlas.png" type="Texture" id=3]
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tileset/forest_tiles.png" type="Texture" id=5]
 [ext_resource path="res://Tileset/tileset_dungeon.png" type="Texture" id=6]
 [ext_resource path="res://Tileset/IceTileset.png" type="Texture" id=7]
 [ext_resource path="res://Tileset/sloppymess.png" type="Texture" id=8]
+[ext_resource path="res://Tileset/CollisionPolygon2D.gd" type="Script" id=9]
 [ext_resource path="res://addons/SMRT/dialog.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Tileset/Happy_Dungeon.gd" type="Script" id=12]
 [ext_resource path="res://Patreon Goal Reward Loops - Track 01.wav" type="AudioStream" id=13]
@@ -4128,20 +4130,10 @@
 291/shapes = [  ]
 291/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 525.5, 12 )
-
-[sub_resource type="RectangleShape2D" id=20]
-extents = Vector2( 10, 305.5 )
-
-[sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 16, 139.25 )
-
-[sub_resource type="RectangleShape2D" id=31]
-extents = Vector2( 64.75, 10 )
-
-[sub_resource type="RectangleShape2D" id=32]
-extents = Vector2( 10, 32 )
+[sub_resource type="Curve2D" id=33]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -19, -51, 0, 0, 0, 0, -19, 607, 0, 0, 0, 0, 1020, 610, 0, 0, 0, 0, 1017, 513, 0, 0, 0, 0, 941, 513, 0, 0, 0, 0, 937, 297, 0, 0, 0, 0, 954, 289, 0, 0, 0, 0, 1214, 291, 0, 0, 0, 0, 1216, 259, 0, 0, 0, 0, 1332, 261, 0, 0, 0, 0, 1341, 274, 0, 0, 0, 0, 1339, 367, 0, 0, 0, 0, 1185, 367, 0, 0, 0, 0, 1187, 542, 0, 0, 0, 0, 1569, 541, 0, 0, 0, 0, 1567, 367, 0, 0, 0, 0, 1381, 368, 0, 0, 0, 0, 1381, 273, 0, 0, 0, 0, 1392, 260, 0, 0, 0, 0, 1500, 260, 0, 0, 0, 0, 1498, 222, 0, 0, 0, 0, 1562, 224, 0, 0, 0, 0, 1560, 159, 0, 0, 0, 0, 1749, 162, 0, 0, 0, 0, 1761, 177, 0, 0, 0, 0, 1763, 332, 0, 0, 0, 0, 1668, 334, 0, 0, 0, 0, 1668, 451, 0, 0, 0, 0, 1749, 451, 0, 0, 0, 0, 1758, 465, 0, 0, 0, 0, 1758, 762, 0, 0, 0, 0, 1741, 774, 0, 0, 0, 0, 1635, 772, 0, 0, 0, 0, 1632, 899, 0, 0, 0, 0, 1537, 978, 0, 0, 0, 0, 1644, 1089, 0, 0, 0, 0, 1754, 1089, 0, 0, 0, 0, 1760, 1100, 0, 0, 0, 0, 1760, 1108, 0, 0, 0, 0, 1446, 1109, 0, 0, 0, 0, 1445, 1696, 0, 0, 0, 0, 2108, 1697, 0, 0, 0, 0, 2109, 1123, 0, 0, 0, 0, 2110, 1104, 0, 0, 0, 0, 1791, 1106, 0, 0, 0, 0, 1791, 1097, 0, 0, 0, 0, 1798, 1090, 0, 0, 0, 0, 1900, 1090, 0, 0, 0, 0, 2019, 960, 0, 0, 0, 0, 1920, 865, 0, 0, 0, 0, 1916, 773, 0, 0, 0, 0, 1808, 776, 0, 0, 0, 0, 1796, 761, 0, 0, 0, 0, 1795, 463, 0, 0, 0, 0, 1806, 450, 0, 0, 0, 0, 1887, 452, 0, 0, 0, 0, 1886, 331, 0, 0, 0, 0, 1793, 332, 0, 0, 0, 0, 1791, 259, 0, 0, 0, 0, 1828, 259, 0, 0, 0, 0, 1827, 166, 0, 0, 0, 0, 1921, 166, 0, 0, 0, 0, 1921, 193, 0, 0, 0, 0, 1980, 193, 0, 0, 0, 0, 1978, 76, 0, 0, 0, 0, 1310, 73, 0, 0, 0, 0, 1311, 109, 0, 0, 0, 0, 1281, 108, 0, 0, 0, 0, 1281, 172, 0, 0, 0, 0, 1147, 173, 0, 0, 0, 0, 1147, 238, 0, 0, 0, 0, 952, 238, 0, 0, 0, 0, 935, 225, 0, 0, 0, 0, 934, 156, 0, 0, 0, 0, 770, 156, 0, 0, 0, 0, 769, -41, 0, 0, 0, 0, -2, -40, 0, 0, 0, 0, -2, -110, 0, 0, 0, 0, 2072, -24, 0, 0, 0, 0, 2350, 1783, 0, 0, 0, 0, 1385, 1736, 0, 0, 0, 0, 1382, 694, 0, 0, 0, 0, -101, 707, 0, 0, 0, 0, -91, -71, 0, 0, 0, 0, -19, -51 )
+}
 
 [node name="World" type="Node2D"]
 position = Vector2( 509, 259 )
@@ -4191,267 +4183,80 @@ language = "res://Dialogue/dial1.lan"
 
 [node name="barricades" type="Node" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="barricades"]
+[node name="barricadeBody" type="StaticBody2D" parent="barricades"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D"]
-position = Vector2( 504.5, 619 )
-shape = SubResource( 19 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="barricades/barricadeBody"]
+script = ExtResource( 9 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="barricades/StaticBody2D"]
-position = Vector2( 1795, 1706 )
-shape = SubResource( 19 )
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="barricades"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D2"]
-position = Vector2( 505, -28 )
-shape = SubResource( 19 )
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="barricades"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D3"]
-position = Vector2( -28, 308 )
-shape = SubResource( 20 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="barricades/StaticBody2D3"]
-position = Vector2( 1432, 1409 )
-shape = SubResource( 20 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="barricades/StaticBody2D3"]
-position = Vector2( 2117, 1422 )
-shape = SubResource( 20 )
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="barricades"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D4"]
-position = Vector2( 1046, 68 )
-shape = SubResource( 21 )
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="barricades"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D5"]
-position = Vector2( 1048, 466 )
-shape = SubResource( 21 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="barricades/StaticBody2D5"]
-position = Vector2( 1169, 494 )
-shape = SubResource( 21 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="barricades/StaticBody2D5"]
-position = Vector2( 1810, 621 )
-shape = SubResource( 21 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="barricades/StaticBody2D5"]
-position = Vector2( 1743, 623 )
-shape = SubResource( 21 )
-
-[node name="StaticBody2D6" type="StaticBody2D" parent="barricades"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D6"]
-position = Vector2( 1088, 221 )
-shape = SubResource( 31 )
-
-[node name="StaticBody2D9" type="StaticBody2D" parent="barricades"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D9"]
-position = Vector2( 1091, 316 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="barricades/StaticBody2D9"]
-position = Vector2( 1160, 317 )
-shape = SubResource( 31 )
-
-[node name="StaticBody2D7" type="StaticBody2D" parent="barricades"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1278, 267 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1239, 376 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1280, 376 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D16" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1250, 556 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D17" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1378, 556 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D18" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1505, 556 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D19" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1692, 461 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D26" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1664, 760 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D27" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1890, 761 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D28" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 2017, 1114 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D31" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 2062, 1113 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D29" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1534, 1114 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D30" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1496, 1114 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D20" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1862, 460 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D21" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1695, 344 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D22" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1685, 344 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D23" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1864, 344 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D14" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1443, 375 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D15" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1502, 376 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1446, 267 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D25" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1247, 116 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1863, 266 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1633, 172 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D24" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1564, 236 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1696, 172 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1215, 183 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1377, 89 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1507, 88 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1636, 88 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1765, 88 )
-shape = SubResource( 31 )
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="barricades/StaticBody2D7"]
-position = Vector2( 1894, 87 )
-shape = SubResource( 31 )
-
-[node name="StaticBody2D8" type="StaticBody2D" parent="barricades"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1144, 194 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D15" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1271, 131 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D16" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1271, 131 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D14" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1578, 196 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1962, 111 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1962, 170 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1897, 355 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1898, 417 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1898, 450 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1655, 449 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1655, 386 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1655, 355 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1579, 385 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1578, 448 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1578, 510 )
-shape = SubResource( 32 )
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="barricades/StaticBody2D8"]
-position = Vector2( 1578, 545 )
-shape = SubResource( 32 )
+[node name="Path2D" type="Path2D" parent="barricades/barricadeBody"]
+curve = SubResource( 33 )
 
 [node name="EnemyPlacer" type="Node2D" parent="."]
+
+[node name="Enemy" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 443, 301 )
+
+[node name="Enemy2" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( -451, 280 )
+
+[node name="Enemy3" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( -474, -243 )
+enemy_type = 2
+
+[node name="Enemy4" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1003, 197 )
+
+[node name="Enemy5" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1414, -144 )
+
+[node name="Enemy6" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 717, 244 )
+enemy_type = 3
+
+[node name="Enemy7" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 834, -154 )
+enemy_type = 2
+
+[node name="Enemy8" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1004, -76 )
+enemy_type = 4
+
+[node name="Enemy9" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1176, 155 )
+enemy_type = 4
+
+[node name="Enemy10" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1384, 647 )
+
+[node name="Enemy11" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1096, 738 )
+enemy_type = 3
+
+[node name="Enemy12" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1378, 802 )
+enemy_type = 3
+
+[node name="Enemy13" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1357, 162 )
+
+[node name="Enemy14" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 872, 251 )
+enemy_type = 2
+
+[node name="Enemy15" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1440, -99 )
+enemy_type = 2
+
+[node name="Enemy16" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 1194, 604 )
+
+[node name="Enemy17" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( -444, 176 )
+enemy_type = 4
+
+[node name="Enemy18" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( -29, 314 )
+
+[node name="Enemy19" parent="EnemyPlacer" instance=ExtResource( 4 )]
+position = Vector2( 198, -254 )
+enemy_type = 4
