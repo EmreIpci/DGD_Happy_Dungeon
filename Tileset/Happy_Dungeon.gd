@@ -18,3 +18,10 @@ func _enemy_died():
 
 func _reload():
 	get_tree().reload_current_scene()
+
+
+
+
+
+func _on_PauseButton_pressed():
+	get_tree().paused = !get_tree().paused

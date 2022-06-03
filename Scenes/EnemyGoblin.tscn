@@ -6,26 +6,6 @@
 [ext_resource path="res://Enemy/Goblin/Run.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/EnemySprite.gd" type="Script" id=5]
 
-[sub_resource type="AtlasTexture" id=47]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=48]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 150, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=49]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 300, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=50]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 450, 0, 150, 150 )
-
 [sub_resource type="AtlasTexture" id=31]
 flags = 4
 atlas = ExtResource( 2 )
@@ -65,6 +45,26 @@ region = Rect2( 900, 0, 150, 150 )
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 1050, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 150, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 300, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=50]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 450, 0, 150, 150 )
 
 [sub_resource type="AtlasTexture" id=39]
 flags = 4
@@ -128,15 +128,15 @@ region = Rect2( 450, 0, 150, 150 )
 
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
-"loop": false,
-"name": "death",
-"speed": 8.0
-}, {
 "frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
 "loop": false,
 "name": "attack",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
+"loop": false,
+"name": "death",
+"speed": 8.0
 }, {
 "frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
 "loop": true,

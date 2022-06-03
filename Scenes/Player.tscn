@@ -21,6 +21,21 @@ flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 66, 64, 33, 32 )
 
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 32, 33, 32 )
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 33, 32, 33, 32 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 66, 32, 33, 32 )
+
 [sub_resource type="AtlasTexture" id=38]
 flags = 4
 atlas = ExtResource( 5 )
@@ -35,16 +50,6 @@ region = Rect2( 33, 0, 33, 32 )
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 66, 0, 33, 32 )
-
-[sub_resource type="AtlasTexture" id=48]
-flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 33, 32, 33, 32 )
-
-[sub_resource type="AtlasTexture" id=33]
-flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 33, 0, 33, 32 )
 
 [sub_resource type="AtlasTexture" id=41]
 flags = 4
@@ -61,30 +66,25 @@ flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 66, 96, 33, 32 )
 
-[sub_resource type="AtlasTexture" id=44]
-flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 0, 32, 33, 32 )
-
-[sub_resource type="AtlasTexture" id=45]
-flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 33, 32, 33, 32 )
-
-[sub_resource type="AtlasTexture" id=46]
-flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 66, 32, 33, 32 )
-
 [sub_resource type="AtlasTexture" id=47]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 33, 96, 33, 32 )
 
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 33, 32, 33, 32 )
+
 [sub_resource type="AtlasTexture" id=49]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 33, 64, 33, 32 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 33, 0, 33, 32 )
 
 [sub_resource type="SpriteFrames" id=34]
 animations = [ {
@@ -93,40 +93,40 @@ animations = [ {
 "name": "walk_right",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 6.0
+}, {
 "frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
 "loop": true,
 "name": "walk_down",
 "speed": 6.0
-}, {
-"frames": [ SubResource( 48 ) ],
-"loop": true,
-"name": "idle_left",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 33 ) ],
-"loop": false,
-"name": "idle_down",
-"speed": 1.0
 }, {
 "frames": [ SubResource( 41 ), SubResource( 42 ), SubResource( 43 ) ],
 "loop": true,
 "name": "walk_up",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
-"loop": true,
-"name": "walk_left",
-"speed": 6.0
-}, {
 "frames": [ SubResource( 47 ) ],
 "loop": true,
 "name": "idle_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 48 ) ],
+"loop": true,
+"name": "idle_left",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 49 ) ],
 "loop": true,
 "name": "idle_right",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 33 ) ],
+"loop": false,
+"name": "idle_down",
+"speed": 1.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=50]

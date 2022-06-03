@@ -6,22 +6,6 @@
 [ext_resource path="res://Enemy/Flying eye/Attack.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/EnemySprite.gd" type="Script" id=5]
 
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
-region = Rect2( 150, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
-region = Rect2( 300, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
-region = Rect2( 450, 0, 150, 150 )
-
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 150, 150 )
@@ -53,6 +37,22 @@ region = Rect2( 900, 0, 150, 150 )
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 4 )
 region = Rect2( 1050, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 150, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 300, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 450, 0, 150, 150 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 1 )
@@ -104,15 +104,15 @@ region = Rect2( 450, 0, 150, 150 )
 
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": false,
-"name": "death",
-"speed": 8.0
-}, {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": false,
 "name": "attack",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": false,
+"name": "death",
+"speed": 8.0
 }, {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
 "loop": true,
