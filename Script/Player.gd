@@ -1,6 +1,11 @@
 extends KinematicBody2D
 
 var id : int = 1
+#Please add this veriable "id" in every PhysicsBody2D or Area2D object
+#and assign an unnique value to it.
+#Currently id for Player = 1, Enemy = 2, SWORD = 3, BarricadeBody = 4
+
+
 export var speed = 1000
 var motion = Vector2()
 
@@ -27,7 +32,7 @@ func _ready():
 	
 	
 func _physics_process(delta):
-	GetCollisions()
+#	GetCollisions()
 	CheckingSoundingEffect()
 	
 func _process(delta):
@@ -114,25 +119,17 @@ func CheckMovementLoop():
 		match movement:
 			"walk_left":
 				IDLE = "idle_left"
-				$AnimatedSprite.play(IDLE)
-				if !$SwordAnim.is_playing():
-					$SwordAnim.play("idle_left")
+				
 			"walk_right":
 				IDLE = "idle_right"
-				$AnimatedSprite.play(IDLE)
-				if !$SwordAnim.is_playing():
-					$SwordAnim.play("idle_right")
 			"walk_up":
 				IDLE = "idle_up"
-				$AnimatedSprite.play(IDLE)
-				if !$SwordAnim.is_playing():
-					$SwordAnim.play("idle_up")
 			"walk_down":
 				IDLE = "idle_down"
-				$AnimatedSprite.play(IDLE)
-				if !$SwordAnim.is_playing():
-					$SwordAnim.play("idle_down")
-				
+		$AnimatedSprite.play(IDLE)
+		if !$SwordAnim.is_playing():
+			$SwordAnim.play(IDLE)
+		
 func GetCollisions():
 	for i in range(get_slide_count()):
 		var enemy = get_slide_collision(i).collider.has_method("is_enemy")
@@ -160,10 +157,12 @@ func Attack():
 func _on_SwordAnim_animation_finished(anim_name):
 	if anim_name == "swing_right" or anim_name == "swing_left" or anim_name == "swing_up" or anim_name == "swing_down":
 		swinging = false
-		set_deferred("monitoring", false)
+		$SWORD.set_deferred("monitoring", false)
 
 
 func _on_SWORD_body_entered(body):
-	print(body.name)
+	if !swinging:
+		return
 	if body.id == 2 :
+		swinging = false
 		body._take_hit()
