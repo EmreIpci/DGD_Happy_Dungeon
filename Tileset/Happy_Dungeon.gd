@@ -6,18 +6,15 @@ var enemy = preload("res://Enemy/Enemy.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
 	randomize()
-	var screen_size = get_viewport().get_visible_rect().size
+	get_tree().paused = false
 	$barricades/barricadeBody/CollisionPolygon2D.polygon = $barricades/barricadeBody/Path2D.curve.tessellate()
 	
-#	for i in range(1,number_of_enemies):
-#
-#		var xRange = rand_range(0,screen_size.x)
-#		var yRange = rand_range(0,screen_size.y)
-#
-#		var enemy_instance = enemy.instance()
-#
-#		enemy_instance.position = Vector2(rand_range(0,screen_size.x),rand_range(0,screen_size.y))
-#
-#		add_child(enemy_instance)
+func _enemy_died():
+	if $EnemyPlacer.get_child_count() <= 1:
+		$GameOver.set_position($Player.position)
+		$GameOver._won(true)
+		$GameOver.visible = true
+
+func _reload():
+	get_tree().reload_current_scene()

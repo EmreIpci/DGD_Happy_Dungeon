@@ -22,22 +22,6 @@ region = Rect2( 300, 0, 150, 150 )
 atlas = ExtResource( 2 )
 region = Rect2( 450, 0, 150, 150 )
 
-[sub_resource type="AtlasTexture" id=75]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=76]
-atlas = ExtResource( 1 )
-region = Rect2( 150, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=77]
-atlas = ExtResource( 1 )
-region = Rect2( 300, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=78]
-atlas = ExtResource( 1 )
-region = Rect2( 450, 0, 150, 150 )
-
 [sub_resource type="AtlasTexture" id=63]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 150, 150 )
@@ -102,16 +86,27 @@ region = Rect2( 900, 0, 150, 150 )
 atlas = ExtResource( 4 )
 region = Rect2( 1050, 0, 150, 150 )
 
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 1 )
+region = Rect2( 450, 0, 150, 150 )
+
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
 "frames": [ SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
 "loop": false,
 "name": "death",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ) ],
-"loop": false,
-"name": "hit",
 "speed": 8.0
 }, {
 "frames": [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ) ],
@@ -122,6 +117,11 @@ animations = [ {
 "frames": [ SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
 "loop": true,
 "name": "move",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ) ],
+"loop": false,
+"name": "hit",
 "speed": 8.0
 } ]
 

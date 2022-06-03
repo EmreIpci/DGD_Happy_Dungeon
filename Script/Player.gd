@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
 var id : int = 1
-#Please add this veriable "id" in every PhysicsBody2D or Area2D object
+#Please add this veriable "id" in every PhysicsBody2D or 2D object
 #and assign an unnique value to it.
 #Currently id for Player = 1, Enemy = 2, SWORD = 3, BarricadeBody = 4
 
-
+var health : int = 60
 export var speed = 1000
 var motion = Vector2()
 
@@ -25,6 +25,8 @@ var swinging : bool = false
 
 func _ready():
 	IDLE = "idle_down"
+	$LifeProgress.max_value = health
+	$LifeProgress.value = health
 	$SWORD.set_deferred("monitoring", false)
 	set_physics_process(true)
 	set_process(true)
@@ -166,3 +168,13 @@ func _on_SWORD_body_entered(body):
 	if body.id == 2 :
 		swinging = false
 		body._take_hit()
+
+func _lose_health(val:int):
+	health -= val
+	$LifeProgress.value = health
+	if health <= 0:
+		var game_over = get_parent().get_node("GameOver")
+		game_over.set_position(position)
+		game_over._won(false)
+		game_over.visible = true
+		get_tree().paused = true

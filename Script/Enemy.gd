@@ -11,9 +11,11 @@ export var is_boss : bool = false
 var speed = 20
 onready var timer = get_node("Timer")
 onready var timer2 = get_node("Timer2")
+onready var timer3 = get_node("Timer3")
 var dir_rand =  null
 var track_player : bool = false
-var attacking : bool = false
+var getting_hit : bool = false
+var attack : bool = true
 var player
 var move_dir : Vector2
 var which_enemy
@@ -46,11 +48,8 @@ func _ready():
 	timer.start(rand_range(2.5, 3.5))
 	
 func _physics_process(delta):
+	_attack()
 	if track_player:
-		if (player.get_global_position().x - get_global_position().x) < 12:
-			if !attacking:
-				_attack()
-			return
 		move_dir = (player.position - position).normalized()
 		if move_dir.x < 0:
 			which_enemy.flip_h = true
@@ -69,8 +68,7 @@ func movement_loop():
 
 func move(dir):
 	move_and_slide(dir * speed)
-		
-
+	
 func _on_Area2D_body_entered(body):
 	if body.name == "Player":
 		$Label.visible = true
@@ -89,22 +87,36 @@ func _on_Timer_timeout():
 	timer.start(rand_range(2.5, 3.5))
 
 func _take_hit():
-	print("hit")
 	health -= 1
+	getting_hit = true
 	if health <= 0:
-		which_enemy.is_death = true
+		which_enemy.is_dead = true
 		which_enemy.play("death")
 	else:
 		which_enemy.play("hit")
+		timer2.start(0.5)
 
 func _death_anim_finished():
+	get_parent().get_parent()._enemy_died()
 	queue_free()
 
 func _attack():
-	attacking = true
-	which_enemy.play("attack")
-	timer2.start(1.5)
-	
+	if getting_hit or !attack:
+		return
+	for i in range(get_slide_count()-1):
+		if get_slide_collision(i).collider.id == 1:
+			which_enemy.play("attack")
+			attack = false
+			timer3.start(1.0)
 
 func _on_Timer2_timeout():
-	attacking = false
+	getting_hit = false
+
+func _on_Timer3_timeout():
+	attack = true
+	for i in range(get_slide_count()-1):
+		if get_slide_collision(i).collider.id == 1:
+			if !is_boss:
+				get_node("/root/World/Player")._lose_health(enemy_type)
+			else:
+				get_node("/root/World/Player")._lose_health(8)
