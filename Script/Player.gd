@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
 var id : int = 1
-#Please add this veriable "id" in every PhysicsBody2D or 2D object
-#and assign an unnique value to it.
+#Please add this veriable "id" in every PhysicsBody2D or Area2D object
+#and assign an unnique value to it. It is used to identify which body or area is colliding with the player.
 #Currently id for Player = 1, Enemy = 2, SWORD = 3, BarricadeBody = 4
 
-var health : int = 60
+
+var health : int = 60	#Defines maximum health of the player
 export var speed = 1000
 var motion = Vector2()
 
@@ -21,13 +22,13 @@ var IDLE = null
 export (int) var timer = 0.2
 onready var Cam = $Camera2D
 
-var swinging : bool = false
+var swinging : bool = false	 #Sword only works when player swings it.
 
 func _ready():
-	IDLE = "idle_down"
+	IDLE = "idle_down"	#At the starting of the game, player animation is idle down.
 	$LifeProgress.max_value = health
 	$LifeProgress.value = health
-	$SWORD.set_deferred("monitoring", false)
+	$SWORD.set_deferred("monitoring", false)	#as At the begining the sword is not swinging.
 	set_physics_process(true)
 	set_process(true)
 	visible = true
@@ -39,7 +40,7 @@ func _physics_process(delta):
 	
 func _process(delta):
 	ApplyMovement(delta)
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept"):	#Player is swinging the sword and now it is working.
 		swinging = true
 		$SWORD.set_deferred("monitoring", true)
 		Attack()
@@ -99,7 +100,7 @@ func CheckingSoundingEffect():
 	else:
 		sound.stop()
 	
-func CheckMovementLoop():
+func CheckMovementLoop():	#Handles player movements.
 	if moving:
 		if !motion.is_normalized():
 			match motion.normalized():
@@ -132,19 +133,19 @@ func CheckMovementLoop():
 		if !$SwordAnim.is_playing():
 			$SwordAnim.play(IDLE)
 		
-func GetCollisions():
-	for i in range(get_slide_count()):
-		var enemy = get_slide_collision(i).collider.has_method("is_enemy")
-		
-		if enemy == true:
-			queue_free()
-			print("Goto End Screen")
+#func GetCollisions():
+#	for i in range(get_slide_count()):
+#		var enemy = get_slide_collision(i).collider.has_method("is_enemy")
+#
+#		if enemy == true:
+#			queue_free()
+#			print("Goto End Screen")
 			
 func DialCheck():
 	dialKeyCheck = Input.is_action_pressed("ui_dial")
 	return dialKeyCheck
 	
-func Attack():
+func Attack():	#Matches the sword animation with the player animation.
 	match IDLE:
 		"idle_right":
 			$SwordAnim.play("swing_right")
@@ -156,20 +157,20 @@ func Attack():
 			$SwordAnim.play("swing_down")
 
 
-func _on_SwordAnim_animation_finished(anim_name):
+func _on_SwordAnim_animation_finished(anim_name):	#Sword will only work while player swings it.
 	if anim_name == "swing_right" or anim_name == "swing_left" or anim_name == "swing_up" or anim_name == "swing_down":
 		swinging = false
 		$SWORD.set_deferred("monitoring", false)
 
 
-func _on_SWORD_body_entered(body):
+func _on_SWORD_body_entered(body):	#Sword hit enemy only once in one swing.
 	if !swinging:
 		return
 	if body.id == 2 :
 		swinging = false
 		body._take_hit()
 
-func _lose_health(val:int):
+func _lose_health(val:int):	#called from enemy when it successfully hits the player. It updates the health and health bar & check if the player died.
 	health -= val
 	$LifeProgress.value = health
 	if health <= 0:
